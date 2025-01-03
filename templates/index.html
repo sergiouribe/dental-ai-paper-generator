@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dental AI Paper Generator</title>
+       
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 20px;
+            color: #333;
+        }
+        h1 {
+            text-align: center;
+            color: #222;
+        }
+        button {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .output {
+            margin-top: 20px;
+            padding: 15px;
+            background: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            font-family: monospace;
+            white-space: pre-wrap;
+        }
+    </style>
+    <script>
+        function generatePaper() {
+            fetch('/generate')
+                .then(response => response.json())
+                .then(data => {
+                    const output = Object.entries(data).map(([section, content]) => `${section}:\n${content}`).join('\n\n');
+                    document.getElementById('output').innerText = output;
+                })
+                .catch(error => {
+                    document.getElementById('output').innerText = 'Error generating paper. Please try again.';
+                    console.error('Error:', error);
+                });
+        }
+    </script>
+</head>
+<body>
+    <h1>Dental AI Paper Generator</h1>
+    <button onclick="generatePaper()">Generate My Dental AI Paper</button>
+    <div class="output" id="output">Your generated paper will appear here.</div>
+</body>
+ <p style="text-align: center; font-size: 14px; color: #666;">by: <a href="https://sergiouri.be" target="_blank" style="color: #007BFF; text-decoration: none;">sergiouri.be</a></p>
+</html>
